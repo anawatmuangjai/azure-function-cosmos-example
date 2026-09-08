@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "CosmosDb:ConnectionString": "AccountEndpoint=https://<your-cosmos-account>.documents.azure.com:443/;AccountKey=<your-account-key>;",
+    "CosmosDb:DatabaseName": "ConsentServiceDb",
+    "CosmosDb:ContainerName": "Consents"
+  },
+  "Host": {
+    "LocalHttpPort": 7071,
+    "CORS": "*"
+  }
+}
