@@ -1,0 +1,40 @@
+## Ignore Visual Studio / .NET / Azure Functions build artifacts and local settings.
+
+# Azure Functions local settings (contains secrets, never commit this file)
+local.settings.json
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+
+# Rider / ReSharper
+.idea/
+*.DotSettings.user
+
+# VS Code
+.vscode/
+
+# Azurite local storage emulator
+__azurite_db*__.json
+__blobstorage__/
+__queuestorage__/
+__tablestorage__/
+
+# NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+
+# OS files
+.DS_Store
+Thumbs.db
