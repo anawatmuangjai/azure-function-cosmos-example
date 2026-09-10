@@ -96,7 +96,15 @@ public sealed class ConsentFunctionsClient : IConsentFunctionsClient
     public async Task<Consent?> GetConsentAsync(string id, string? userId = null, CancellationToken cancellationToken = default)
     {
         using HttpRequestMessage message = CreateRequest(HttpMethod.Get, BuildConsentUri(id, userId));
-        return await SendForJsonAsync<Consent>(message, cancellationToken);
+        using HttpResponseMessage response = await _httpClient.SendAsync(message, cancellationToken);
+
+        if (response.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+
+        await ThrowIfNotSuccessAsync(response, cancellationToken);
+        return await ReadFromJsonAsync<Consent>(response, cancellationToken);
     }
 
     public async Task<PagedConsentsResponse> ListConsentsAsync(
@@ -159,7 +167,11 @@ public sealed class ConsentFunctionsClient : IConsentFunctionsClient
     {
         using HttpResponseMessage response = await _httpClient.SendAsync(message, cancellationToken);
         await ThrowIfNotSuccessAsync(response, cancellationToken);
+        return await ReadFromJsonAsync<T>(response, cancellationToken);
+    }
 
+    private static async Task<T> ReadFromJsonAsync<T>(HttpResponseMessage response, CancellationToken cancellationToken)
+    {
         await using Stream responseStream = await response.Content.ReadAsStreamAsync(cancellationToken);
         T? payload = await JsonSerializer.DeserializeAsync<T>(responseStream, JsonOptions, cancellationToken);
 
