@@ -57,7 +57,7 @@ internal sealed class ConsentWorkflow
         }
         catch (FunctionAppApiException ex)
         {
-            _logger.LogError("Azure Function returned {StatusCode}: {ResponseBody}", (int)ex.StatusCode, ex.ResponseBody);
+            _logger.LogError(ex, "Azure Function returned {StatusCode}: {ResponseBody}", (int)ex.StatusCode, ex.ResponseBody);
         }
         catch (Exception ex)
         {
