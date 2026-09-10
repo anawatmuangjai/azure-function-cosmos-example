@@ -205,6 +205,11 @@ Errors are logged via the standard `ILogger<T>` abstraction, and Application Ins
 is available out of the box through `Microsoft.Azure.Functions.Worker.ApplicationInsights` (set
 the `APPLICATIONINSIGHTS_CONNECTION_STRING` app setting to enable it).
 
+## Calling the Functions from C#
+
+For a detailed guide to call the HTTP trigger endpoints from service callers, see [CALLING_FUNCTIONS.md](CALLING_FUNCTIONS.md).
+A ready-to-run sample client is included at `/samples/ConsentFunctionsClient.Console`.
+
 ## Notes
 
 - This is an **example/sample** project intended for learning purposes; add authentication,
